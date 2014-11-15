@@ -1,8 +1,12 @@
-# Tuxedo
+# Anden
 
 [![Build Status](https://secure.travis-ci.org/goliatone/anden.png)](http://travis-ci.org/goliatone/anden)
 
 Application structure for express apps.
+
+Andén (Spanish)
+**plat•form** _(plătˈfôrmˌ)_
+>n.  A horizontal surface raised above the level of the adjacent area, as a landing alongside railroad tracks.
 
 ## Getting Started
 Install the module with: `npm install anden`
