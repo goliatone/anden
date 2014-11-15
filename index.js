@@ -6,26 +6,29 @@ var extend = require('extend');
 
 var DEFAULTS = {
 	autoinitialize:true,
-	port:9000,
-	host:'localhost',
-	path:'./'
+	config:{
+		port:9000,
+		host:'localhost',
+		appPath: process.cwd()
+	}
 };
 
-var Anden = function(config){
-	config = extend({}, this.constructor.DEFAULTS, config);
-	if(config.autoinitialize ) this.init(config);
+var Anden = function(options){
+	options = extend({}, this.constructor.DEFAULTS, options);
+	if(options.autoinitialize ) this.init(options);
 };
 
 Anden.DEFAULTS = DEFAULTS;
 
-Anden.prototype.init = function(config){
+Anden.prototype.init = function(options){
 	if(this.initialized) return;
 	this.initialized = true;
-	extend(this, this.constructor.DEFAULTS, config);
+	extend(this, this.constructor.DEFAULTS, options);
 };
 
-Anden.prototype.run = function(){
-	this.logger.log('START!', __dirname)
+Anden.prototype.run = function(config){
+	extend(this.config, config || {});
+	this.logger.log('START!', this.config);
 };
 
 Anden.prototype.logger = console;
