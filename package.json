@@ -3,12 +3,16 @@
   "version": "0.0.0",
   "description": "Anden provides application structure for express apps",
   "main": "index.js",
+  "bin": {
+    "anden": "./bin/anden"
+  },
   "scripts": {
-    "test": "test"
+    "test": "mocha --recursive",
+    "deploy": "git push && git push --tags && npm publish"
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/goliatone/anden.git"
+    "url": "git://github.com/goliatone/anden"
   },
   "keywords": [
     "express",
@@ -25,6 +29,13 @@
   "dependencies": {
     "colors": "^1.0.3",
     "optimist": "^0.6.1",
-    "extend": "^2.0.0"
+    "extend": "^2.0.0",
+    "express": "^4.10.2",
+    "opener": "^1.4.0"
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.2",
+    "mocha-lcov-reporter": "0.0.1",
+    "supertest": "^0.15.0"
   }
 }
