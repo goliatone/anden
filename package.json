@@ -1,0 +1,30 @@
+{
+  "name": "anden",
+  "version": "0.0.0",
+  "description": "Anden provides application structure for express apps",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/goliatone/anden.git"
+  },
+  "keywords": [
+    "express",
+    "restful",
+    "mock",
+    "api"
+  ],
+  "author": "goliatone <hello@goliatone.com> (http://goliatone.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/goliatone/anden/issues"
+  },
+  "homepage": "https://github.com/goliatone/anden",
+  "dependencies": {
+    "colors": "^1.0.3",
+    "optimist": "^0.6.1",
+    "extend": "^2.0.0"
+  }
+}
