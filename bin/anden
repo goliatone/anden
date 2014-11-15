@@ -1,0 +1,42 @@
+#!/usr/bin/env node
+'use strict';
+
+var argv, options, colors, optimist;
+
+colors = require('colors');
+optimist = require('optimist');
+
+argv = optimist.usage('Usage: anden [options]\n\n anden -p 9000 -a localhost')
+	.alias('p', 'port')
+	.default('p', 9000)
+	.describe('p', 'Port number')
+	.alias('a', 'address')
+	.default('a', 'localhost')
+	.describe('a', 'Address to use')
+	.argv;
+
+if(argv.help) return optimist.showHelp(printLine);
+
+//How to use positional arguments with optimist?!
+//also, how to enforce positional args?!!
+var rootPath = argv._[0];
+
+console.log('rootPath', rootPath)
+console.log('_dirname', __dirname)
+console.log('argv._', argv._)
+console.log('argv.$0', argv.$0)
+console.log('process.argv', process.argv)
+console.log('port', argv.port)
+console.log('address', argv.address)
+
+var Anden = require('../index');
+var anden = new Anden({path:rootPath, port:argv.port, host:argv.address});
+anden.run({
+
+});
+
+
+function printLine(line) {
+	if(argv.pigments) return process.stdout.write(line + '\n');
+	return process.stdout.write(line.stripColors + '\n');
+}
