@@ -1,0 +1,72 @@
+{
+  "name": "app",
+  "version": "0.0.0",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "test"
+  ],
+  "devDependencies": {},
+  "dependencies": {
+    "jquery": "~2.0.3",
+    "requirejs": "~2.1.4",
+    "requirejs-text": "2.0.6",
+    "requirejs-domready": "2.0.1",
+    "foundation": "latest",
+    "ractive": "latest",
+    "gconfig": "latest",
+    "gstorage": "latest",
+    "gcollection": "latest",
+    "gpub": "latest",
+    "grouter": "latest",
+    "go2o": "latest",
+    "gsocket": "latest",
+    "glogger": "latest",
+    "gioc": "latest",
+    "requirejs-codemirror": "*",
+    "codemirror": "~4.6.0"
+  },
+  "exportsOverride": {
+    "jquery": {
+      "js": "jquery.js"
+    },
+    "requirejs-text": {
+      "js": "text.js"
+    },
+    "requirejs-domready": {
+      "js": "domReady.js"
+    },
+    "requirejs": {
+      "js": "require.js"
+    },
+    "gconfig": {
+      "js": "src/*.js"
+    },
+    "gpub": {
+      "js": "src/gpub.js"
+    },
+    "glogger": {
+      "js": "src/glogger.js"
+    },
+    "grouter": {
+      "js": "src/grouter.js"
+    },
+    "go2o": {
+      "js": "src/*.js"
+    },
+    "gcollection": {
+      "js": "src/*.js"
+    },
+    "gstorage": {
+      "js": "src/*.js"
+    },
+    "gsocket": {
+      "js": "src/*.js"
+    },
+    "ractive": {
+      "js": "ractive.js"
+    }
+  }
+}
