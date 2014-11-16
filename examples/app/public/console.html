@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="http://highlightjs.org/static/styles/monokai.css" />
+    <style type="text/css">
+    body {
+        background: #232323;
+        color: #666;
+    }
+    h1,h2,h3,h4,h5{
+        color: #f3f3f3;
+    }
+    .wrapper {
+        margin-top: 40px;
+    }
+    .console-output {
+        height: 100%;
+        display: block;
+        border:solid #555 1px;
+        padding:25px 25px 25px 25px;
+        background-color: #343434;
+    }
+    .console-output {
+        overflow: scroll;
+        overflow-x:hidden;
+        height:500px;
+        /*-webkit-overflow-scrolling: touch;*/
+    }
+    textarea {
+        height: auto;
+    }
+    </style>
+    <script src="js/shim.js"></script>
+    <script src="http://highlightjs.org/static/highlight.pack.js"></script>
+
+    <script id="groupSelect-template"  type="text/x-ractivejs-component">
+        <div id="groupSelect" class="row js-GroupSelect">
+            <!-- End Main Content -->
+            <!-- Sidebar -->
+            <aside class="large-12 columns">
+                <h4><a href="#">Payload</a>
+                </h4>
+                <hr/>
+                <div class="row collapse">
+                    <div class="small-3 large-7 columns">
+                        <label>Id:
+                            <select value='{{selectedPayload}}' disabled='{{!connected}}'>
+                                <option selected disabled>Select a payload</option>
+                                {{#activePayloads}}
+                                    <option value='{{name}}'>{{name}}</option>
+                                {{/activePayloads}}
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="small-3 large-4 columns">
+                        <label>Group:
+                            <select value='{{selectedGroup}}' disabled='{{!connected}}'>
+                                <option selected disabled>Select a group</option>
+                                {{#groups}}
+                                    <option value='{{id}}'>{{id}}</option>
+                                {{/groups}}
+                            </select>
+                        </label>
+                    </div>
+                </div>
+             </aside>
+        </div>
+    </script>
+    <script id="importExport-template"  type="text/x-ractivejs-component">
+        <div id="importExport" class="row js-ImportExport">
+            <aside class="large-12 columns clearfix">
+                <h4><a href="#" data-reveal-id="myModal">Import/Export</a>
+                </h4>
+            </aside>
+        </div>
+         <div id="myModal" class="reveal-modal" data-reveal>
+            <aside class="large-12 columns">
+                <div class="row">
+                    <textarea id="ieContent"
+                        value='{{ieContent}}'
+                        placeholder='Dump content...'
+                        type="text" rows="20"></textarea>
+                </div>
+                <div class="row">
+                    <div class="clearfix right">
+                        <button on-click='import' class="button success radius">Import</button>
+
+                        <button on-click='export' class="button radius">Export</button>
+                    </div>
+                </div>
+            </aside>
+
+          <a class="close-reveal-modal">&#215;</a>
+        </div>
+    </script>
+    <script id="payloadControl-template"  type="text/x-ractivejs-component">
+        <div id="payloadControl" class="row js-PayloadControl">
+            <aside class="large-12 columns">
+                <div class="row collapse">
+                    <label>Message Object:</label>
+                    <textarea id="sendMessage"
+                        disabled='{{!connected}}'
+                        value='{{payloadData}}'
+                        placeholder='Message...'
+                        type="text" rows="9"></textarea>
+                </div>
+                <div class="row collapse">
+                    <div class="small-3 large-1 columns">
+                        <span class="prefix">ID:</span>
+                    </div>
+                    <div class="small-7 large-4 columns">
+                        <input type="text" rows="9" cols="9" disabled='{{!connected}}' value={{payload.name}} />
+                    </div>
+                    <div class="small-3 large-1 columns">
+                        <span class="prefix">GROUP:</span>
+                    </div>
+                    <div class="small-7 large-4 columns">
+                        <input type="text" rows="9" cols="9" disabled='{{!connected}}' value={{payload.group}} />
+                    </div>
+                    <div class="small-2 columns">
+                        <button id="deletePayload"
+                            disabled='{{!connected}}'
+                            class="button alert postfix">
+                        Delete Payload
+                        </button>
+                    </div>
+                </div>
+                <button id="send"
+                        disabled='{{!connected}}'
+                        on-click='send'
+                        class="button tiny radius expand">
+                    Send
+                </button>
+            </aside>
+        </div>
+    </script>
+
+    <script id="connetionManager-template"  type="text/x-ractivejs-component">
+        <div id="connetionManager" class="row js-ConnectionManager">
+            <aside class="large-12 columns">
+                <h4><a href="#">Connection</a>
+                </h4>
+                <hr/>
+                <div class="row collapse">
+                    <div class="small-3 large-2 columns">
+                        <span class="prefix">WS endpoint:</span>
+                    </div>
+                    <div class="small-7 large-8 columns">
+                        <input id="wsUri" type="text"
+                               value="{{endpoint}}"
+                               placeholder="Enter your URL...">
+                    </div>
+                    <div class="small-2 columns">
+                        <button id="connect"
+                           on-click='onconnect'
+                           class="button postfix  {{connected ? 'success' : ''}}">
+                            {{connected ? 'Disconnect' : 'Connect'}}
+                        </button>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </script>
+
+    <script id="console-template"  type="text/x-ractivejs-component">
+        <!-- {{>item}} -->
+            <code>{{formatDate(time)}}</code>
+            <span style="color: green;">
+                EMITTED:
+            </span>
+            <br/>
+            <pre>
+                <code>{{{text}}}</code>
+            </pre>
+            <br/>
+        <!-- {{/item}} -->
+
+        <div id="console" class="row js-ConsoleOutput">
+            <div class="large-12 columns console" role="content">
+                <h4><a href="#">Output</a>
+                </h4>
+                <article id="consoleLog" class="console-output">
+                    {{#messages:i}}
+                        {{>item}}
+                    {{/messages}}
+                </article>
+                <br/>
+                <button id="clearLogBut"
+                        on-click='clearLog'
+                        class="button expand tiny radius">Clear log
+                </button>
+            </div>
+        </div>
+        <!--@End Console -->
+    </script>
+    <script id="content-template"  type="text/x-ractivejs">
+
+        <div id="content" class="wrapper">
+            <!-- Nav Bar -->
+            <div class="row">
+                <div class="large-12 columns">
+                    <h2>WebSocket Console
+                        <small>Simulate commands.</small>
+                    </h2>
+                    <hr />
+                </div>
+            </div>
+            <!-- End Nav -->
+
+            <Console />
+            <br/>
+
+            <ConnectionManager />
+
+            <ImportExport />
+            <GroupSelect />
+            <PayloadControl />
+
+        </div>
+        <!--@END Wrapper -->
+    </script>
+</head>
+
+<body>
+    <div id="content" class='wrapper'></div>
+</body>
+    <script src="js/components/requirejs/require.js" data-main="js/main"></script>
+</html>
