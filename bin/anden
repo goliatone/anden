@@ -40,7 +40,7 @@ var anden = new Anden();
 anden.run({
 	host:argv.host,
 	port:argv.port,
-	appPath:argv.appPath
+	root:argv.appPath
 });
 
 
