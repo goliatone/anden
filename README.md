@@ -20,6 +20,17 @@ anden -h
 anden -p 9000 -a localhost
 ```
 
+## Organization
+HMVC
+Sub apps:
+static: prefixed with mount name. 
+```javascript
+//in sub app console
+var mountName = 'console';
+// GET /console/style.css etc.
+app.use(mountName, express.static(__dirname + '/public'));
+```
+
 ## Examples
 
 ## TODOs
