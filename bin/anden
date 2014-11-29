@@ -20,8 +20,9 @@ if(argv.help) return optimist.showHelp(printLine);
 //How to use positional arguments with optimist?!
 //also, how to enforce positional args?!!
 var rootPath = argv._[0];
-argv.appPath = process.cwd();
+argv.appPath = rootPath || process.cwd();
 
+console.log('root path', argv.appPath)
 /*
 // console.log(argv)
 console.log('===> rootPath', rootPath)
@@ -35,7 +36,9 @@ console.log('host', argv.host)
 */
 
 var Anden = require('../index');
-var anden = new Anden();
+var anden = new Anden({
+	path:argv.appPath
+});
 
 /*anden.on('run', function(){
 	console.log('------------------')
@@ -53,8 +56,7 @@ console.log(config.load());
 
 anden.run({
 	host:argv.host,
-	port:argv.port,
-	root:argv.appPath
+	port:argv.port
 });
 
 
