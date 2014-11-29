@@ -1,9 +1,10 @@
 {
-    "ignore": ["subapp2"],
+    "ignore": ["subapp2", "subapp3"],
     "moduleIds": {
-        "environment": "env",
-        "middleware": "mid",
-        "sockets": "sock"
+        "environment":"env",
+        "routes":"routes",
+        "middleware":"middleware",
+        "sockets":"sockets"
     },
-    "staticDir": "www"
+    "staticDir": "public"
 }
