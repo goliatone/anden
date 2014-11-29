@@ -1,13 +1,11 @@
 'use strict';
 var path = require('path');
+var debug = require('debug')('app:middleware');
 
 module.exports = function(anden){
-	console.log(__filename,'running');
-
-	anden.app.get('/peperone', function(req, res) {
-        res.send('<h1>Hello peperone!</h1><p>this is the life!</p>');
-    });
+	debug('MIDDLEWARE APP %s running', __filename);
 
 	var staticPath = path.resolve('public');
+	debug('[%s] use express static %s %s', anden.name, staticPath);
     anden.app.use(anden.app.express.static(staticPath));
 };
