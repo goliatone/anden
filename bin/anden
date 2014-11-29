@@ -37,6 +37,20 @@ console.log('host', argv.host)
 var Anden = require('../index');
 var anden = new Anden();
 
+/*anden.on('run', function(){
+	console.log('------------------')
+	var util = require('util');
+	console.log(util.inspect(anden.app._router.stack, { showHidden: true, depth: null }));
+	var routeHelper = require('../lib/utils/routes');
+	routeHelper.dump(anden.app._router);
+});*/
+
+/*
+var Conductor = require('../conductor');
+var config = new Conductor({filename:'/Users/goliatone/Development/NODEJS/anden/examples/app/.anden.json'});
+console.log(config.load());
+*/
+
 anden.run({
 	host:argv.host,
 	port:argv.port,
