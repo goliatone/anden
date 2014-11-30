@@ -7,13 +7,13 @@ colors = require('colors');
 optimist = require('optimist');
 
 argv = optimist.usage('Usage: anden [options]\n\n anden -p 9000 -a localhost')
-	.alias('p', 'port')
-	.default('p', 9000)
-	.describe('p', 'Port number')
-	.alias('h', 'host')
-	.default('h', 'localhost')
-	.describe('h', 'Host address to use')
-	.argv;
+    .alias('p', 'port')
+    .default('p', 9000)
+    .describe('p', 'Port number')
+    .alias('h', 'host')
+    .default('h', 'localhost')
+    .describe('h', 'Host address to use')
+    .argv;
 
 if(argv.help) return optimist.showHelp(printLine);
 
@@ -24,22 +24,37 @@ argv.appPath = rootPath || process.cwd();
 
 var Anden = require('../index');
 var anden = new Anden({
-	path:argv.appPath
+    path:argv.appPath
 });
 
 /*anden.on('run', function(){
-	console.log('------------------', anden.getUrl())
-	require('node-thrust')(function(err, api) {
-	  api.window({ root_url: anden.getUrl()+'/console.html' }).show();
-	});
+    console.log('------------------', anden.getUrl())
+    require('node-thrust')(function(err, api) {
+      api.window({ root_url: anden.getUrl()+'/console.html' }).show();
+    });
 });*/
 
+anden.on('run', function(){
+    var routers = [], subap;
+    routers = routers.concat(anden.routers);
+    routers = routers.concat([anden.app._router]);
+    Object.keys(anden.subapps).forEach(function(id){
+        subap = anden.subapps[id];
+        console.log('APP', subap.routers.length)
+        routers = routers.concat(subap.routers)
+        routers = routers.concat([subap.app._router])
+    });
+    require('../lib/utils/routes').dump.apply(null, routers);
+    // console.log('routers', routers.length)
+
+});
+
 anden.run({
-	host:argv.host,
-	port:argv.port
+    host:argv.host,
+    port:argv.port
 });
 
 function printLine(line) {
-	if(argv.pigments) return process.stdout.write(line + '\n');
-	return process.stdout.write(line.stripColors + '\n');
+    if(argv.pigments) return process.stdout.write(line + '\n');
+    return process.stdout.write(line.stripColors + '\n');
 }
