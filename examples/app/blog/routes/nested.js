@@ -1,7 +1,8 @@
 var Route = {};
 
 Route.priority = 11;
-Route.using = '/kk';
+//We don't need the mountpath here, we already plug it on subap creation
+// Route.using = '/blog';
 
 Route.register = function(app, options){
     console.log('**********************************')
