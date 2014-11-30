@@ -1,12 +1,12 @@
 var Route = {};
 
 Route.priority = 11;
-Route.using = '/admin';
+// Route.using = '/admin';
 
 Route.register = function(app, options){
     console.log('**********************************')
     console.log('**********************************')
-    console.log('- blog: register tag route');
+    console.log('- admin: register tag route');
     app.get('/users', function(req, res){
         res.send('<h1>All your users</h1><p>This should list all users</p>');
     });
