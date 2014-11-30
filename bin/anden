@@ -22,43 +22,22 @@ if(argv.help) return optimist.showHelp(printLine);
 var rootPath = argv._[0];
 argv.appPath = rootPath || process.cwd();
 
-console.log('root path', argv.appPath)
-/*
-// console.log(argv)
-console.log('===> rootPath', rootPath)
-console.log('_dirname', __dirname)
-console.log('argv._', argv._)
-console.log('argv.$0', argv.$0)
-console.log('process.argv', process.argv)
-console.log('process.argv', process.cwd())
-console.log('port', argv.port)
-console.log('host', argv.host)
-*/
-
 var Anden = require('../index');
 var anden = new Anden({
 	path:argv.appPath
 });
 
 /*anden.on('run', function(){
-	console.log('------------------')
-	var util = require('util');
-	console.log(util.inspect(anden.app._router.stack, { showHidden: true, depth: null }));
-	var routeHelper = require('../lib/utils/routes');
-	routeHelper.dump(anden.app._router);
+	console.log('------------------', anden.getUrl())
+	require('node-thrust')(function(err, api) {
+	  api.window({ root_url: anden.getUrl()+'/console.html' }).show();
+	});
 });*/
-
-/*
-var Conductor = require('../conductor');
-var config = new Conductor({filename:'/Users/goliatone/Development/NODEJS/anden/examples/app/.anden.json'});
-console.log(config.load());
-*/
 
 anden.run({
 	host:argv.host,
 	port:argv.port
 });
-
 
 function printLine(line) {
 	if(argv.pigments) return process.stdout.write(line + '\n');
