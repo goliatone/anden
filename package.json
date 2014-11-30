@@ -42,7 +42,8 @@
     "serve-favicon": "^2.1.6",
     "ws": "^0.4.31",
     "grunt-cli": "^0.1.13",
-    "gextend": "^0.1.6"
+    "gextend": "^0.1.6",
+    "node-thrust": "^0.7.5-rc2"
   },
   "devDependencies": {
     "coveralls": "^2.11.2",
