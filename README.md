@@ -34,7 +34,17 @@ app.use(mountName, express.static(__dirname + '/public'));
 ## Examples
 
 ## TODOs
+- init: Make core modules configurable, ie io-sockets or ws-socket.
+- config manager: so we can edit options from CLI and save them in `.anden.json`
+- logging: Internal log support. Provide endpoint for apps.
 
+Apps:
+- WsConsole
+- Log dashboard
+- Fakeful
+- Tuxedo
+- Route dashboard
+- Default index page
 
 ## Documentation
 _(Coming soon)_
