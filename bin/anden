@@ -35,7 +35,10 @@ var anden = new Anden({
 });*/
 
 anden.on('run', function(){
-    require('../lib/utils/routes').collectRouteMetameta(anden);
+   var metadata = require('../lib/utils/routes').collectRouteMetameta(anden);
+   metadata.walkAllRoutes(function(route){
+        route.toString();
+   });
 });
 
 anden.run({
