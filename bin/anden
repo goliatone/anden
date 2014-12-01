@@ -15,7 +15,7 @@ argv = optimist.usage('Usage: anden [options]\n\n anden -p 9000 -a localhost')
     .describe('h', 'Host address to use')
     .argv;
 
-if(argv.help) return optimist.showHelp(printLine);
+if(argv.help) return optimist.showHelp(require('../lib/utils/optimist').printLine(argv));
 
 //How to use positional arguments with optimist?!
 //also, how to enforce positional args?!!
@@ -45,8 +45,3 @@ anden.run({
     host:argv.host,
     port:argv.port
 });
-
-function printLine(line) {
-    if(argv.pigments) return process.stdout.write(line + '\n');
-    return process.stdout.write(line.stripColors + '\n');
-}
