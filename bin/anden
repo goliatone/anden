@@ -35,10 +35,15 @@ var anden = new Anden({
 });*/
 
 anden.on('run', function(){
+    var Table = require('cli-table');
+    var table = new Table({ head: ['', 'Mount', 'Uri'] });
    var metadata = require('../lib/utils/metadata').collectRouteMetameta(anden);
    metadata.walkAllRoutes(function(route){
-        route.toString();
+        var _o = {};
+        _o[route.method]  = [route.mountpath, route.uri ];
+        table.push(_o);
    });
+   console.log(table.toString());
 });
 
 anden.run({
