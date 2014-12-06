@@ -46,7 +46,11 @@ anden.on('run', function(){
    console.log(table.toString());
 });
 
-anden.run({
-    host:argv.host,
-    port:argv.port
-});
+try{
+    anden.run({
+        host:argv.host,
+        port:argv.port
+    });
+} catch(e){
+    console.log('Unable to run Anden:\n', e);
+}

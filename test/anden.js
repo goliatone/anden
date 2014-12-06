@@ -6,7 +6,8 @@ describe('anden', function(){
 
     beforeEach(function(){
         anden = new Anden();
-    })
+    });
+
     it('should have a ROOT_NAME class prop', function(){
         assert.equal('root', Anden.ROOT_NAME);
     });
