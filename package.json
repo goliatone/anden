@@ -29,7 +29,6 @@
   "dependencies": {
     "colors": "^1.0.3",
     "optimist": "^0.6.1",
-    "extend": "^2.0.0",
     "express": "^4.10.2",
     "opener": "^1.4.0",
     "trackfinder": "0.0.2",
